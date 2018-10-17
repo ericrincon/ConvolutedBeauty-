@@ -11,6 +11,9 @@ from torchvision import transforms, utils
 from convolutedbeauty.data.utils import get_images
 
 
+
+
+
 class BeautyDataSet(Dataset):
     """Dataset for the training of (dubious) "beauty" models using (admittedly low quality) images"""
 
@@ -24,6 +27,13 @@ class BeautyDataSet(Dataset):
         return len(self.image_files)
 
     def _get_attrs(self, filepath):
+        """
+        Read in a filepath and parse it for the gender, rating, and username
+
+        (Honestly this function is disgusting but it will do for now)
+        :param filepath: (str) absolute file path
+        :return: (tuple) with elements (str, str, float)
+        """
         split_name = filepath.split("_")
 
         gender, username, rating = None, None, None
@@ -38,6 +48,11 @@ class BeautyDataSet(Dataset):
         return gender, username, rating
 
     def _filter_files(self, files):
+        """
+        Filters out a list of file paths
+        :param files: (list) a list of absolute files paths where each element is a string
+        :return: (list) list of strings
+        """
         filtered_files = []
 
         for file in files:
