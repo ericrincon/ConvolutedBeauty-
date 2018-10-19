@@ -1,17 +1,9 @@
-import torch
-import os
+"""
+Simple classes for pretrained torch models
+"""
 
-import os
-import numpy as np
-
-import torch
 import torchvision
 import torch.nn as nn
-import torch.backends.cudnn as cudnn
-
-import torchvision.transforms as transforms
-from torch.utils.data import DataLoader
-from sklearn.metrics import roc_auc_score
 
 
 class DenseNet121(nn.Module):
