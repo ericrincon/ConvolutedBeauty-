@@ -13,7 +13,7 @@ class SqueezeExcitationBlock(nn.Module):
     def __init__(self, input_size, in_channels, out_channels, kernel_size, reduction_ratio):
         super(SqueezeExcitationBlock, self).__init__()
 
-        self.global_pooling = nn.AvgPool2d(kernel_size)
+        self.global_pooling = nn.AvgPool2d(input_size)
 
         # where fc refers to fully connected
         self.fc_1 = nn.Conv2d(in_channels, out_channels/reduction_ratio, input_size)
@@ -32,4 +32,4 @@ class SqueezeExcitationBlock(nn.Module):
         output = self.fc_2(output)  # 1 x 1 x C
         output = F.sigmoid(output)  # 1 x 1 x C
 
-        return output + x
+        return output
